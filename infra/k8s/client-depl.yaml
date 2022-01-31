@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: client
-          image: froszt/client
+          image: frostzt/client
 ---
 apiVersion: v1
 kind: Service
