@@ -1,16 +1,13 @@
 import express from "express";
 import "express-async-errors";
 import cookieSession from "cookie-session";
+import { NotFoundError, errorHandler } from "@fztgettix/common";
 
 // Routes Handlers
 import { signinRouter } from "./routes/signin";
 import { signupRouter } from "./routes/signup";
 import { signoutRouter } from "./routes/signout";
-import { NotFoundError } from "./errors/not-found-error";
 import { currentUserRouter } from "./routes/current-user";
-
-// Middlewares
-import { errorHandler } from "./middlewares/error-handler";
 
 const app = express();
 app.set("trust proxy", true);
