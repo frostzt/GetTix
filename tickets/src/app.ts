@@ -1,7 +1,9 @@
 import express from "express";
 import "express-async-errors";
 import cookieSession from "cookie-session";
-import { NotFoundError, errorHandler } from "@fztgettix/common";
+import { NotFoundError, errorHandler, currentUser } from "@fztgettix/common";
+import { createTicketRouter } from "./routes/new";
+import { showTicketsRouter } from "./routes/show.";
 
 const app = express();
 app.set("trust proxy", true);
@@ -12,6 +14,10 @@ app.use(
     secure: process.env.NODE_ENV !== "test",
   })
 );
+app.use(currentUser);
+
+app.use(createTicketRouter);
+app.use(showTicketsRouter);
 
 app.all("*", () => {
   throw new NotFoundError();

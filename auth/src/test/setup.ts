@@ -4,11 +4,7 @@ import request from "supertest";
 import { app } from "../app";
 
 declare global {
-  namespace NodeJS {
-    interface Global {
-      signIn(): Promise<string[]>;
-    }
-  }
+  function signIn(): Promise<string[]>;
 }
 
 // Create a new In-Memory Mongo Instance
@@ -37,7 +33,6 @@ afterAll(async () => {
   await mongoose.connection.close();
 }, 10000);
 
-// @ts-expect-error for some reason it does not detect the change
 global.signIn = async () => {
   const email = "test@test.com";
   const password = "password";
