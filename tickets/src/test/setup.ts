@@ -15,7 +15,7 @@ beforeAll(async () => {
   const mongoUri = mongo.getUri();
 
   await mongoose.connect(mongoUri);
-});
+}, 10000);
 
 // Reset MongoDB Collections before each new test
 beforeEach(async () => {
@@ -24,7 +24,7 @@ beforeEach(async () => {
   for (let collection of collections) {
     await collection.deleteMany({});
   }
-});
+}, 10000);
 
 // Cleanup
 afterAll(async () => {
@@ -33,8 +33,9 @@ afterAll(async () => {
 }, 10000);
 
 global.signIn = () => {
+  const id = new mongoose.Types.ObjectId().toHexString();
   const payload = {
-    id: "1234hiioa9",
+    id,
     email: "test@test.com",
   };
 

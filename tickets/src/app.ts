@@ -2,8 +2,10 @@ import express from "express";
 import "express-async-errors";
 import cookieSession from "cookie-session";
 import { NotFoundError, errorHandler, currentUser } from "@fztgettix/common";
+import { updateTicketRouter } from "./routes/update";
 import { createTicketRouter } from "./routes/new";
-import { showTicketsRouter } from "./routes/show.";
+import { showTicketsRouter } from "./routes/show";
+import { ticketsRouter } from "./routes/index";
 
 const app = express();
 app.set("trust proxy", true);
@@ -18,6 +20,8 @@ app.use(currentUser);
 
 app.use(createTicketRouter);
 app.use(showTicketsRouter);
+app.use(ticketsRouter);
+app.use(updateTicketRouter);
 
 app.all("*", () => {
   throw new NotFoundError();
